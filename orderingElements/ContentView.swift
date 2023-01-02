@@ -35,6 +35,21 @@ struct sizeClassView: View{
 }
 
 struct compactDesign: View{
+  
+  let number = "912345678"
+  let message = "¡Hola!👋 Necesito más información."
+  
+  func sendMessage(){
+    let sms = "sms:\(number)&body=\(message)"
+    guard let stringSMS = sms.addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) else { return }
+    UIApplication.shared.open(URL.init(string: stringSMS)!, options: [:], completionHandler: nil)
+  }
+  
+  func sendCall(){
+    guard let numberSend = URL(string: "tel://\(number)") else { return }
+    UIApplication.shared.open(numberSend)
+  }
+  
   var body: some View{
     ZStack{
       Color.teal.edgesIgnoringSafeArea(.all)
@@ -56,13 +71,13 @@ struct compactDesign: View{
           .font(.title)
         HStack{
           Button {
-            
+            sendCall()
           } label: {
             Image(systemName:"phone.fill")
               .modifier(buttonModifier(color: Color.green))
           }
           Button {
-            
+            sendMessage()
           } label: {
             Image(systemName:"message.fill")
               .modifier(buttonModifier(color: Color.blue))
