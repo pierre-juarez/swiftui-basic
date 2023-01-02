@@ -39,21 +39,36 @@ struct compactDesign: View{
     ZStack{
       Color.teal.edgesIgnoringSafeArea(.all)
       VStack{
-        Image("icon-futurama-bender")
+       /** Image("icon-futurama-bender")
           .resizable()
           .frame(width: 144, height: 144, alignment: .center)
-          .clipShape(Circle())
+          .clipShape(Circle()) **/
         Image(systemName:"person.crop.circle")
           .font(.system(size: 100, weight: .bold))
           .foregroundColor(.blue)
-        Text("Bender Bending Rodríguez")
+        Text("Blender B. Rodríguez")
           .bold()
           .foregroundColor(.white)
           .font(.largeTitle)
-        Text("Vive en la galaxia de Futurama, o eso parece👀")
+        Text("Futurama,#123")
           .italic()
           .foregroundColor(.white)
           .font(.title)
+        HStack{
+          Button {
+            
+          } label: {
+            Image(systemName:"phone.fill")
+              .modifier(buttonModifier(color: Color.green))
+          }
+          Button {
+            
+          } label: {
+            Image(systemName:"message.fill")
+              .modifier(buttonModifier(color: Color.blue))
+          }
+
+        }
       }
     }
   }
@@ -80,6 +95,18 @@ struct regularDesign: View{
         }
       }
     }
+  }
+}
+
+struct buttonModifier: ViewModifier{
+  var color: Color
+  func body(content: Content) -> some View {
+    content
+      .padding()
+      .background(color)
+      .clipShape(Circle())
+      .foregroundColor(Color.white)
+      .font(.title)
   }
 }
 
